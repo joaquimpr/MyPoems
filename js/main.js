@@ -1,9 +1,12 @@
+
 "use strict";
 
 import { poems } from "./poems.js";
+import { createReader } from "./reader.js";
 
 const app = {
-    initialized: false
+    initialized: false,
+    reader: null
 };
 
 function initializeApp() {
@@ -11,9 +14,16 @@ function initializeApp() {
         return;
     }
 
-    app.initialized = true;
+    const readerElement = document.querySelector("#reader");
+    const readerContent = document.querySelector("#reader-content");
 
-    console.log("Poemas disponíveis:", poems.length);
+    app.reader = createReader(poems, readerContent);
+
+    readerElement.addEventListener("click", () => {
+        app.reader.next();
+    });
+
+    app.initialized = true;
 }
 
 initializeApp();

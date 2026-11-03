@@ -68,3 +68,29 @@
     font-family: var(--font-interface);
     font-size: 0.7rem;
 }
+
+
+.reader__poem-title {
+    margin: 0;
+
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+
+.reader__verses {
+    font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+    line-height: 1.35;
+}
+
+.reader__stanza {
+    margin: 0 0 1.5em;
+
+    white-space: pre-line;
+}
+
+.reader__stanza:last-child {
+    margin-bottom: 0;
+}
