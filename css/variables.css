@@ -1,0 +1,17 @@
+:root {
+    color-scheme: light;
+
+    --color-background: #f2ede5;
+    --color-text: #29251f;
+    --color-muted: #81796f;
+    --color-accent: #825b47;
+    --color-border: rgba(41, 37, 31, 0.16);
+
+    --font-body: Georgia, "Times New Roman", serif;
+    --font-interface: Arial, Helvetica, sans-serif;
+
+    --page-padding: 32px;
+    --content-width: 720px;
+
+    --transition-duration: 250ms;
+}

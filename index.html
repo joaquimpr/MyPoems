@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#f2ede5">
+    <meta name="description" content="Entre Linhas — um livro de poemas.">
+
+    <title>Entre Linhas — Poemas</title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <header class="header">
+        <a class="header__brand" href="/" aria-label="Entre Linhas">
+            Entre Linhas
+        </a>
+
+        <nav class="header__actions" aria-label="Controlos">
+            <button class="button" type="button" id="theme-toggle">
+                Tema
+            </button>
+
+            <button class="button" type="button" id="index-toggle">
+                Índice
+            </button>
+        </nav>
+    </header>
+
+    <main class="reader" id="reader">
+        <section class="reader__content" aria-live="polite">
+            <p class="reader__eyebrow">Poemas</p>
+
+            <h1 class="reader__title">Entre Linhas</h1>
+
+            <p class="reader__hint">
+                Toca para começar
+            </p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span id="reading-counter"></span>
+        <span id="reading-hint">Espaço para continuar</span>
+    </footer>
+</body>
+</html>
