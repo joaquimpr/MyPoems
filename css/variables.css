@@ -1,3 +1,4 @@
+
 :root {
     color-scheme: light;
 
@@ -7,11 +8,22 @@
     --color-accent: #825b47;
     --color-border: rgba(41, 37, 31, 0.16);
 
-    --font-body: Georgia, "Times New Roman", serif;
-    --font-interface: Arial, Helvetica, sans-serif;
+    --font-reading: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --font-interface: Inter, Arial, Helvetica, sans-serif;
 
     --page-padding: 32px;
     --content-width: 720px;
 
     --transition-duration: 250ms;
+    --transition-easing: ease;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-background: #211e1b;
+    --color-text: #e9e0d5;
+    --color-muted: #a49a8e;
+    --color-accent: #c49a7b;
+    --color-border: rgba(233, 224, 213, 0.18);
 }

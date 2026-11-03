@@ -1,11 +1,18 @@
+html,
+body {
+    width: 100%;
+}
+
 body {
     display: flex;
     flex-direction: column;
 
+    overflow: hidden;
+
     background: var(--color-background);
     color: var(--color-text);
 
-    font-family: var(--font-body);
+    font-family: var(--font-reading);
 
     transition:
         background-color var(--transition-duration),
@@ -34,6 +41,7 @@ body {
 .reader {
     display: grid;
     flex: 1;
+    min-height: 0;
 
     place-items: center;
 
@@ -60,6 +68,14 @@ body {
     .footer {
         padding-top: 20px;
         padding-bottom: 20px;
+    }
+
+    .header {
+        gap: 12px;
+    }
+
+    .header__actions {
+        gap: 6px;
     }
 
     .reader {
