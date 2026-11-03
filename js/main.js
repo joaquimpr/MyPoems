@@ -1,7 +1,9 @@
 "use strict";
 
+import { poems } from "./poems.js";
+
 const app = {
-    initialized: false,
+    initialized: false
 };
 
 function initializeApp() {
@@ -11,7 +13,7 @@ function initializeApp() {
 
     app.initialized = true;
 
-    console.log("App started.");
+    console.log("Poemas disponíveis:", poems.length);
 }
 
 initializeApp();
