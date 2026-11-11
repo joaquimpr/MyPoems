@@ -1,5 +1,5 @@
 export function initPoemSlider(reader, buttonElement) {
-    const SLIDE_INTERVAL_MS = 800;
+    const SLIDE_INTERVAL_MS = 1400;
 
     let isAutoPoemEnabled = false;
     let intervalId = null;
