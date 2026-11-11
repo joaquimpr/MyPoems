@@ -17,7 +17,7 @@ async function initializeApp() {
 
     // Initialize theme
     const themeButton = document.querySelector("#theme-toggle");
-    initTheme(themeButton, ["light", "dark"]);
+    initTheme(themeButton, ["light", "dark", "forest", "midnight"]);
 
     const readerElement = document.querySelector("#reader");
     const readerContent = document.querySelector("#reader-content");

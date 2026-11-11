@@ -2,11 +2,11 @@
 :root {
     color-scheme: light;
 
-    --color-background: #f2ede5;
-    --color-text: #29251f;
-    --color-muted: #81796f;
-    --color-accent: #825b47;
-    --color-border: rgba(41, 37, 31, 0.16);
+    --color-background: #fbf0d9;
+    --color-text: #433422;
+    --color-muted: #8c765a;
+    --color-accent: #a65d37;
+    --color-border: rgba(67, 52, 34, 0.16);
 
     --font-reading: "Instrument Serif", Georgia, "Times New Roman", serif;
     --font-interface: Inter, Arial, Helvetica, sans-serif;
@@ -26,4 +26,24 @@
     --color-muted: #a49a8e;
     --color-accent: #c49a7b;
     --color-border: rgba(233, 224, 213, 0.18);
+}
+
+:root[data-theme="forest"] {
+    color-scheme: dark;
+
+    --color-background: #17211b;
+    --color-text: #d8e2dc;
+    --color-muted: #8a9a90;
+    --color-accent: #a3b899;
+    --color-border: rgba(216, 226, 220, 0.18);
+}
+
+:root[data-theme="midnight"] {
+    color-scheme: dark;
+
+    --color-background: #131822;
+    --color-text: #d2daf2;
+    --color-muted: #7e8da9;
+    --color-accent: #e2b774;
+    --color-border: rgba(210, 218, 242, 0.18);
 }
