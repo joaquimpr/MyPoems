@@ -27,7 +27,6 @@ export function createReader(poems, container) {
      */
     function renderIntroduction() {
         const wrapper = document.createElement("div");
-        wrapper.className = "reader__intro-group";
         wrapper.innerHTML = `
             <p class="reader__eyebrow">Poemas de Joaquim</p>
             <h1 class="reader__title">
@@ -44,7 +43,6 @@ export function createReader(poems, container) {
     function renderPoemTitle() {
         const poem = getCurrentPoem();
         const wrapper = document.createElement("div");
-        wrapper.className = "reader__title-group";
         wrapper.innerHTML = `
             <p class="reader__eyebrow">${String(poemIndex + 1).padStart(2, "0")} / ${String(poems.length).padStart(2, "0")}</p>
             <h2 class="reader__poem-title">${splitIntoWords(poem.title)}</h2>
@@ -96,7 +94,6 @@ export function createReader(poems, container) {
      */
     function renderEnd() {
         const wrapper = document.createElement("div");
-        wrapper.className = "reader__end-group";
         wrapper.innerHTML = `
             <h1 class="reader__title">${splitIntoCharacters("Fim", 0)}</h1>
             <p class="reader__hint">Obrigado por leres</p>

@@ -9,7 +9,7 @@ export function createMenu(reader, poems, container) {
                     .map(
                         (poem, index) => `
                     <div class="poem-card" data-index="${index}">
-                        <div class="poem-card-header">
+                        <div>
                             <small>${String(index + 1).padStart(2, "0")}</small>
                         </div>
                         <span>${poem.title || poem.t}</span>
