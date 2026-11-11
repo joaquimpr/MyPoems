@@ -48,6 +48,11 @@ body {
     place-items: center;
 
     padding: 64px var(--page-padding);
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .reader__content {
