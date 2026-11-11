@@ -157,12 +157,6 @@
     color: var(--color-accent);
 }
 
-.poem-card__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .poem-card small {
     font: 500 0.7rem var(--font-interface);
     color: var(--color-muted);
