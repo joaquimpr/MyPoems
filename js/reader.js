@@ -10,8 +10,14 @@ export function createReader(poems, container) {
         return poemIndex;
     }
 
-    function getVerses(poem) {
-        return poem.stanzas.flat();
+    function getPoemLines(poem) {
+        const lines = [];
+        poem.stanzas.forEach((stanza, stanzaIndex) => {
+            stanza.forEach((verseText) => {
+                lines.push({ stanzaIndex, text: verseText });
+            });
+        });
+        return lines;
     }
 
     /**
@@ -51,42 +57,36 @@ export function createReader(poems, container) {
     }
 
     /**
-     * Renders the verses of the current poem.
+     * Renders the verses of the current poem
      */
     function renderVerses() {
         const poem = getCurrentPoem();
-        const verses = getVerses(poem);
+        const poemLines = getPoemLines(poem);
 
         const eyebrow = document.createElement("p");
         eyebrow.className = "reader__eyebrow";
         eyebrow.textContent = `${String(poemIndex + 1).padStart(2, "0")} / ${String(poems.length).padStart(2, "0")}`;
 
         const content = document.createElement("div");
-        content.className = "reader__verses";
+        content.className = "reader__stanza";
 
-        const currentStanza = [];
-        let remainingVerses = verseIndex;
+        const currentLine = poemLines[verseIndex - 1];
+        const activeStanzaLines = poemLines
+            .slice(0, verseIndex)
+            .filter((line) => line.stanzaIndex === currentLine.stanzaIndex);
 
-        for (const stanza of poem.stanzas) {
-            const visibleVerses = stanza.slice(
-                0,
-                Math.max(0, Math.min(stanza.length, remainingVerses)),
-            );
+        activeStanzaLines.forEach((line, index) => {
+            const verseElement = document.createElement("p");
+            const isLatestLine = index === activeStanzaLines.length - 1;
 
-            if (visibleVerses.length > 0) {
-                const stanzaElement = document.createElement("p");
-                stanzaElement.className = "reader__stanza";
-
-                stanzaElement.textContent = visibleVerses.join("\n");
-                content.append(stanzaElement);
-            }
-
-            remainingVerses -= stanza.length;
-        }
+            verseElement.className = "reader__verse" + (isLatestLine ? "" : " old");
+            verseElement.textContent = line.text;
+            content.append(verseElement);
+        });
 
         container.replaceChildren(eyebrow, content);
 
-        if (verseIndex === verses.length) {
+        if (verseIndex === poemLines.length) {
             const hint = document.createElement("p");
             hint.className = "reader__hint";
             hint.textContent = "Toca para continuar";
@@ -119,8 +119,8 @@ export function createReader(poems, container) {
         if (progressBar) {
             let percentage = 0;
             if (poemIndex >= 0 && poemIndex < poems.length) {
-                const verses = getVerses(getCurrentPoem());
-                percentage = verses.length > 0 ? (verseIndex / verses.length) * 100 : 0;
+                const poemLines = getPoemLines(getCurrentPoem());
+                percentage = poemLines.length > 0 ? (verseIndex / poemLines.length) * 100 : 0;
             } else if (poemIndex >= poems.length) {
                 percentage = 100;
             }
@@ -155,9 +155,9 @@ export function createReader(poems, container) {
         } else if (poemIndex >= poems.length) {
             return;
         } else {
-            const verses = getVerses(getCurrentPoem());
+            const poemLines = getPoemLines(getCurrentPoem());
 
-            if (verseIndex < verses.length) {
+            if (verseIndex < poemLines.length) {
                 verseIndex++;
             } else {
                 poemIndex++;
@@ -178,7 +178,7 @@ export function createReader(poems, container) {
 
         if (poemIndex >= poems.length) {
             poemIndex = poems.length - 1;
-            verseIndex = getVerses(getCurrentPoem()).length;
+            verseIndex = getPoemLines(getCurrentPoem()).length;
         } else if (verseIndex > 0) {
             verseIndex--;
         } else if (poemIndex === 0) {
@@ -186,7 +186,7 @@ export function createReader(poems, container) {
             verseIndex = 0;
         } else {
             poemIndex--;
-            verseIndex = getVerses(getCurrentPoem()).length;
+            verseIndex = getPoemLines(getCurrentPoem()).length;
         }
 
         render();
@@ -206,12 +206,12 @@ export function createReader(poems, container) {
             return null;
         }
 
-        const verses = getVerses(getCurrentPoem());
+        const poemLines = getPoemLines(getCurrentPoem());
 
         return {
             poemIndex,
             verseIndex,
-            totalVerses: verses.length,
+            totalVerses: poemLines.length,
         };
     }
 

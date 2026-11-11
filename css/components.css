@@ -80,15 +80,22 @@
     letter-spacing: -0.035em;
 }
 
-.reader__verses {
+.reader__stanza {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
     font-size: clamp(1.5rem, 4.5vw, 2.5rem);
-    line-height: 1.35;
+    line-height: 1.22;
 }
 
-.reader__stanza {
-    margin: 0 0 1.5em;
-
+.reader__verse {
+    margin: 0;
     white-space: pre-line;
+    transition: opacity 0.8s ease;
+}
+
+.reader__verse.old {
+    opacity: 0.38;
 }
 
 .reader__stanza:last-child {
