@@ -1,5 +1,3 @@
-"use strict";
-
 import { loadPoems } from "./services/poemsService.js";
 import { createReader } from "./reader.js";
 import { createNavigation } from "./navigation.js";
