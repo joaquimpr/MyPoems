@@ -3,7 +3,7 @@ export function createNavigation(reader, readerElement) {
     const WHEEL_COOLDOWN_MS = 50;
     const MIN_WHEEL_DELTA = 20;
 
-    const FORWARD_KEYS = ["ArrowRight", "ArrowDown", "PageDown", " "];
+    const FORWARD_KEYS = ["ArrowRight", "ArrowDown", "PageDown", "Enter", " "];
     const BACKWARD_KEYS = ["ArrowLeft", "ArrowUp", "PageUp", "Backspace"];
 
     let wheelLocked = false;
