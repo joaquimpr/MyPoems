@@ -29,6 +29,8 @@ body {
 }
 
 .header {
+    position: relative;
+    z-index: 50;
     gap: 24px;
 }
 

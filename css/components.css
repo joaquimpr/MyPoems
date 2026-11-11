@@ -94,3 +94,84 @@
 .reader__stanza:last-child {
     margin-bottom: 0;
 }
+
+.menu {
+    position: fixed;
+    inset: 0;
+    background: var(--color-background);
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    padding: calc(6rem + env(safe-area-inset-top, 0px)) 2rem 4rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    overflow-y: auto;
+}
+
+.menu.on {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu-grid {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+}
+
+.poem-card {
+    font-family: var(--font-reading);
+    font-size: 1.4rem;
+    line-height: 1.25;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--color-background) 96%, var(--color-text) 4%);
+    transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    min-height: 110px;
+}
+
+.poem-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.poem-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.poem-card small {
+    font: 500 0.7rem var(--font-interface);
+    color: var(--color-muted);
+}
+
+.poem-card span {
+    margin-top: 0.8rem;
+}
+
+.poem-card b {
+    font: 400 0.8rem var(--font-interface);
+    color: var(--color-accent);
+}
+
+.poem-card.active {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 12%, var(--color-background));
+}
+
+.poem-card.active small,
+.poem-card.active span {
+    color: var(--color-accent);
+    font-weight: 500;
+}

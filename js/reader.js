@@ -6,6 +6,10 @@ export function createReader(poems, container) {
         return poems[poemIndex];
     }
 
+    function getCurrentPoemIndex() {
+        return poemIndex;
+    }
+
     function getVerses(poem) {
         return poem.stanzas.flat();
     }
@@ -198,6 +202,17 @@ export function createReader(poems, container) {
         };
     }
 
+    function goToPoem(index) {
+        if (index < 0 || index >= poems.length) {
+            return;
+        }
+
+        poemIndex = index;
+        verseIndex = 0;
+        
+        render();
+    }
+
     render();
 
     return {
@@ -205,5 +220,7 @@ export function createReader(poems, container) {
         previous,
         reset,
         getProgress,
+        goToPoem,
+        getCurrentPoemIndex,
     };
 }

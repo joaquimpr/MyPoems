@@ -1,6 +1,7 @@
 import { loadPoems } from "./services/poemsService.js";
 import { createReader } from "./reader.js";
 import { createNavigation } from "./navigation.js";
+import { createMenu } from "./menu.js";
 
 const app = {
     initialized: false,
@@ -15,7 +16,8 @@ async function initializeApp() {
 
     const readerElement = document.querySelector("#reader");
     const readerContent = document.querySelector("#reader-content");
-
+    const menuContainer = document.querySelector("#menu")
+    
     // Fetch poems
     const poems = await loadPoems();
 
@@ -27,6 +29,8 @@ async function initializeApp() {
     // Initialize modules
     app.reader = createReader(poems, readerContent);
     app.navigation = createNavigation(app.reader, readerElement);
+    
+    createMenu(app.reader, poems, menuContainer);
 
     app.initialized = true;
 }
