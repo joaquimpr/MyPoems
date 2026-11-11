@@ -33,6 +33,11 @@
     color: var(--color-accent);
 }
 
+.button.active {
+    background: var(--color-accent);
+    color: var(--color-background);
+}
+
 .reader__eyebrow {
     margin: 0 0 24px;
 

@@ -3,6 +3,7 @@ import { createReader } from "./reader.js";
 import { createNavigation } from "./navigation.js";
 import { createMenu } from "./menu.js";
 import { initTheme } from "./theme.js";
+import { initPoemSlider } from "./poem_slider.js";
 
 const app = {
     initialized: false,
@@ -36,6 +37,10 @@ async function initializeApp() {
     app.navigation = createNavigation(app.reader, readerElement);
 
     createMenu(app.reader, poems, menuContainer);
+
+    // Initialize poem slider
+    const autoPoemButton = document.querySelector("#auto-poem-toggle");
+    initPoemSlider(app.reader, autoPoemButton);
 
     app.initialized = true;
 }
