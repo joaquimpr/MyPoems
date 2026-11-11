@@ -114,6 +114,19 @@ export function createReader(poems, container) {
      * Main render router that determines which view to display.
      */
     function render() {
+        const progressBar = document.querySelector("#progress-bar");
+
+        if (progressBar) {
+            let percentage = 0;
+            if (poemIndex >= 0 && poemIndex < poems.length) {
+                const verses = getVerses(getCurrentPoem());
+                percentage = verses.length > 0 ? (verseIndex / verses.length) * 100 : 0;
+            } else if (poemIndex >= poems.length) {
+                percentage = 100;
+            }
+            progressBar.style.width = percentage + "%";
+        }
+
         if (poemIndex === -1) {
             renderIntroduction();
             return;
@@ -209,7 +222,7 @@ export function createReader(poems, container) {
 
         poemIndex = index;
         verseIndex = 0;
-        
+
         render();
     }
 
