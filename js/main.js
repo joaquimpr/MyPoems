@@ -1,7 +1,6 @@
-
 "use strict";
 
-import { poems } from "./poems.js";
+import { loadPoems } from "./services/poemsService.js";
 import { createReader } from "./reader.js";
 import { createNavigation } from "./navigation.js";
 
@@ -11,7 +10,7 @@ const app = {
     navigation: null,
 };
 
-function initializeApp() {
+async function initializeApp() {
     if (app.initialized) {
         return;
     }
@@ -19,6 +18,15 @@ function initializeApp() {
     const readerElement = document.querySelector("#reader");
     const readerContent = document.querySelector("#reader-content");
 
+    // Fetch poems
+    const poems = await loadPoems();
+
+    if (!poems || poems.length === 0) {
+        readerContent.textContent = "Não foi possível carregar os poemas.";
+        return;
+    }
+
+    // Initialize modules
     app.reader = createReader(poems, readerContent);
     app.navigation = createNavigation(app.reader, readerElement);
 
