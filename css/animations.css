@@ -53,3 +53,21 @@
     margin: 0.45rem 0;
     transition: opacity 0.8s ease;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .animated-word,
+    .animated-char {
+        animation: none !important;
+        filter: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    html,
+    body,
+    .button,
+    .reader__verse,
+    .poem-card {
+        transition: none !important;
+    }
+}
