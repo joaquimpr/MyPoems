@@ -1,3 +1,5 @@
+import { splitIntoWords, splitIntoCharacters } from "./utils/typography.js";
+
 export function createReader(poems, container) {
     let poemIndex = -1;
     let verseIndex = 0;
@@ -24,19 +26,16 @@ export function createReader(poems, container) {
      * Renders the welcome/introductory screen.
      */
     function renderIntroduction() {
-        const eyebrow = document.createElement("p");
-        eyebrow.className = "reader__eyebrow";
-        eyebrow.textContent = "Poemas de Joaquim";
-
-        const title = document.createElement("h1");
-        title.className = "reader__title";
-        title.textContent = "Entre Linhas";
-
-        const hint = document.createElement("p");
-        hint.className = "reader__hint";
-        hint.textContent = "Toca para começar";
-
-        container.replaceChildren(eyebrow, title, hint);
+        const wrapper = document.createElement("div");
+        wrapper.className = "reader__intro-group";
+        wrapper.innerHTML = `
+            <p class="reader__eyebrow">Poemas de Joaquim</p>
+            <h1 class="reader__title">
+                ${splitIntoCharacters("Entre", 0)} ${splitIntoCharacters("Linhas", 5)}
+            </h1>
+            <p class="reader__hint">Toca para começar</p>
+        `;
+        container.replaceChildren(wrapper);
     }
 
     /**
@@ -44,16 +43,13 @@ export function createReader(poems, container) {
      */
     function renderPoemTitle() {
         const poem = getCurrentPoem();
-
-        const eyebrow = document.createElement("p");
-        eyebrow.className = "reader__eyebrow";
-        eyebrow.textContent = `${String(poemIndex + 1).padStart(2, "0")} / ${String(poems.length).padStart(2, "0")}`;
-
-        const title = document.createElement("h2");
-        title.className = "reader__poem-title";
-        title.textContent = poem.title;
-
-        container.replaceChildren(eyebrow, title);
+        const wrapper = document.createElement("div");
+        wrapper.className = "reader__title-group";
+        wrapper.innerHTML = `
+            <p class="reader__eyebrow">${String(poemIndex + 1).padStart(2, "0")} / ${String(poems.length).padStart(2, "0")}</p>
+            <h2 class="reader__poem-title">${splitIntoWords(poem.title)}</h2>
+        `;
+        container.replaceChildren(wrapper);
     }
 
     /**
@@ -63,51 +59,49 @@ export function createReader(poems, container) {
         const poem = getCurrentPoem();
         const poemLines = getPoemLines(poem);
 
-        const eyebrow = document.createElement("p");
-        eyebrow.className = "reader__eyebrow";
-        eyebrow.textContent = `${String(poemIndex + 1).padStart(2, "0")} / ${String(poems.length).padStart(2, "0")}`;
-
-        const content = document.createElement("div");
-        content.className = "reader__stanza";
-
         const currentLine = poemLines[verseIndex - 1];
         const activeStanzaLines = poemLines
             .slice(0, verseIndex)
             .filter((line) => line.stanzaIndex === currentLine.stanzaIndex);
 
-        activeStanzaLines.forEach((line, index) => {
-            const verseElement = document.createElement("p");
-            const isLatestLine = index === activeStanzaLines.length - 1;
+        const stanzaContainer = document.createElement("div");
+        stanzaContainer.className = "reader__stanza-wrapper";
 
-            verseElement.className = "reader__verse" + (isLatestLine ? "" : " old");
-            verseElement.textContent = line.text;
-            content.append(verseElement);
+        let htmlContent = `
+            <p class="reader__eyebrow">${String(poemIndex + 1).padStart(2, "0")} / ${String(poems.length).padStart(2, "0")}</p>
+            <div class="reader__stanza">
+        `;
+
+        activeStanzaLines.forEach((line, index) => {
+            const isLatestLine = index === activeStanzaLines.length - 1;
+            const verseClass = `reader__verse ${isLatestLine ? "" : "old"}`;
+            
+            const lineContent = isLatestLine ? splitIntoWords(line.text) : line.text;
+            
+            htmlContent += `<p class="${verseClass}">${lineContent}</p>`;
         });
 
-        container.replaceChildren(eyebrow, content);
+        htmlContent += `</div>`;
 
         if (verseIndex === poemLines.length) {
-            const hint = document.createElement("p");
-            hint.className = "reader__hint";
-            hint.textContent = "Toca para continuar";
-
-            container.append(hint);
+            htmlContent += `<p class="reader__hint">Toca para continuar</p>`;
         }
+
+        stanzaContainer.innerHTML = htmlContent;
+        container.replaceChildren(stanzaContainer);
     }
 
     /**
      * Renders the final completion screen.
      */
     function renderEnd() {
-        const title = document.createElement("h1");
-        title.className = "reader__title";
-        title.textContent = "Fim";
-
-        const hint = document.createElement("p");
-        hint.className = "reader__hint";
-        hint.textContent = "Obrigado por leres";
-
-        container.replaceChildren(title, hint);
+        const wrapper = document.createElement("div");
+        wrapper.className = "reader__end-group";
+        wrapper.innerHTML = `
+            <h1 class="reader__title">${splitIntoCharacters("Fim", 0)}</h1>
+            <p class="reader__hint">Obrigado por leres</p>
+        `;
+        container.replaceChildren(wrapper);
     }
 
     /**

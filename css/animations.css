@@ -1,41 +1,59 @@
-
-@keyframes fade-in {
+@keyframes verseWordEnter {
     from {
         opacity: 0;
+        transform: translateY(0.5em);
+        filter: blur(6px);
     }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slide-up {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
     to {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0);
     }
 }
 
-.is-fading-in {
-    animation: fade-in 350ms ease both;
-}
-
-.is-sliding-in {
-    animation: slide-up 450ms ease both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+@keyframes verseCharEnter {
+    from {
+        opacity: 0;
+        transform: translateY(0.3em);
+        filter: blur(4px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.animated-word {
+    display: inline-block;
+    animation: verseWordEnter 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--word-index) * 0.06s);
+    transition: color var(--transition-duration), transform 0.25s ease;
+}
+
+.animated-word:hover {
+    color: var(--color-accent);
+}
+
+.animated-char {
+    display: inline-block;
+    animation: verseCharEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--char-index) * 0.05s);
+    transition: color var(--transition-duration), transform 0.25s ease;
+}
+
+.animated-char:hover {
+    color: var(--color-accent);
+    transform: translateY(-4px);
+}
+
+.reader__verse {
+    font-size: clamp(1.7rem, 5.6vw, 3.1rem);
+    line-height: 1.22;
+    margin: 0.45rem 0;
+    transition: opacity 0.8s ease;
+}
+
+.reader__verse--previous {
+    opacity: 0.38;
 }
