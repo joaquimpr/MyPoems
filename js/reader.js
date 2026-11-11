@@ -97,7 +97,13 @@ export function createReader(poems, container) {
         wrapper.innerHTML = `
             <h1 class="reader__title">${splitIntoCharacters("Fim", 0)}</h1>
             <p class="reader__hint">Obrigado por leres</p>
+            <button class="button reader-restart-button">Recomeçar</button>
         `;
+
+        wrapper.querySelector(".reader-restart-button").addEventListener("click", () => {
+            reset();
+        });
+
         container.replaceChildren(wrapper);
     }
 
