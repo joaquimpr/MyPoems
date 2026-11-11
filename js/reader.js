@@ -229,5 +229,6 @@ export function createReader(poems, container) {
         getProgress,
         goToPoem,
         getCurrentPoemIndex,
+        isFinished: () => poemIndex >= poems.length,
     };
 }

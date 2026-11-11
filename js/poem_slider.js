@@ -10,9 +10,14 @@ export function initPoemSlider(reader, buttonElement) {
             return;
         }
 
+        if (reader.isFinished()) {
+            stopAuto();
+            return;
+        }
+
         reader.next();
     }
- 
+
     // Toggles the auto poem state
     function toggleAutoPoem() {
         isAutoPoemEnabled = !isAutoPoemEnabled;
@@ -22,11 +27,19 @@ export function initPoemSlider(reader, buttonElement) {
 
         // Clear the interval if auto mode was turned off
         if (!isAutoPoemEnabled) {
-            clearInterval(intervalId);
+            stopAuto();
             return;
         }
 
         intervalId = setInterval(autoAdvancePoem, SLIDE_INTERVAL_MS);
+    }
+
+    // Stops the auto poem mode and resets the button state
+    function stopAuto() {
+        isAutoPoemEnabled = false;
+        buttonElement.textContent = "Auto";
+        buttonElement.classList.remove("active");
+        clearInterval(intervalId);
     }
 
     buttonElement.addEventListener("click", toggleAutoPoem);
